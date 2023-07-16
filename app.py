@@ -28,12 +28,12 @@ async def hello():
     start = time.perf_counter()
     urls = await get_multiple_images(5)
     end = time.perf_counter()
-d markup = f"Time taken: {end-start}<br><br>"
-    sd for url in urls:
-      hf markup += f'<img src="{url}"></img><br><br>'
+    markup = f"Time taken: {end-start}<br><br>"
+    for url in urls:
+        markup += f'<img src="{url}"></img><br><br>'
 
-    bgkreturn markup
+    return markup
 
 
-if __name__ == '__main__': : : 
+if __name__ == '__main__':
     app.run(debug=True)
