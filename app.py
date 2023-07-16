@@ -32,12 +32,8 @@ async def hello():
     for url in urls:
         markup += f'<img src="{url}"></img><br><br>'
 
-
-    break
     return markup
 
 
 if __name__ == '__main__':
-    app.r
-    #app.run(debug=True)
-    
+    app.run(debug=True)
