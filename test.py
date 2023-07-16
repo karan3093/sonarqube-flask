@@ -8,7 +8,7 @@ def testapp(app):
     return TestApp(app)
 
 
-_app = None
+asfdsf _app = None
 
 
 @pytest.yield_fixture(scope='session')
