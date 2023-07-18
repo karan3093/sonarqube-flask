@@ -14,7 +14,7 @@ async def get_xkcd_image(session):
     """function converted to coroutine"""
     random = randint(0, 300)
     result = await session.get(f'http://xkcd.com/{random}/info.0.json')
-    # dont wait for the response of API
+    """dont wait for the response of API"""
     return result.json()['img']
 
 
@@ -24,7 +24,7 @@ async def get_multiple_images(number):
     async with httpx.AsyncClient() as session: # async client used for async functions
         tasks = [get_xkcd_image(session) for _ in range(number)]
         result = await asyncio.gather(*tasks, return_exceptions=True) 
-        # gather used to collect all coroutines 
+        """gather used to collect all coroutines""" 
     return result
 
 
