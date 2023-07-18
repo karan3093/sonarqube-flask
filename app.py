@@ -1,4 +1,5 @@
 """This program is for achieveing some task"""
+import list
 import asyncio
 import time
 from random import randint
@@ -8,8 +9,10 @@ from flask import Flask
 app = Flask(__name__)
 
 # function converted to coroutine
-async def get_xkcd_image(session):
+async def get_xkcd_image(session) -> dict:
     """function converted to coroutine
+    :param session: session to connect server
+    :type: obj
     :return: json format
     :rtype: dict"""
     random = randint(0, 300)
@@ -18,13 +21,13 @@ async def get_xkcd_image(session):
     return result.json()['img']
 
 # function converted to coroutine
-async def get_multiple_images(number: int) -> List:
+async def get_multiple_images(number: int) -> list:
     """function converted to coroutine
     :param number: number
     :type number: int
     :return: list of data
-    :rtype: List"""
-    async with httpx.AsyncClient() as session: 
+    :rtype: list"""
+    async with httpx.AsyncClient() as session:
         # async client used for async functions
         tasks = [get_xkcd_image(session) for _ in range(number)]
         result = await asyncio.gather(*tasks, return_exceptions=True)
