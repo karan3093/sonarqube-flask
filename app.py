@@ -5,9 +5,7 @@ from random import randint
 import httpx
 from flask import Flask
 
-
 app = Flask(__name__)
-
 
 # function converted to coroutine
 async def get_xkcd_image(session):
@@ -17,14 +15,17 @@ async def get_xkcd_image(session):
     """dont wait for the response of API"""
     return result.json()['img']
 
-
 # function converted to coroutine
-async def get_multiple_images(number):
-    """function converted to coroutine"""
+async def get_multiple_images(number: int) -> list:
+    """function converted to coroutine
+    :param number: number
+    :type number: int
+    :return: list of data
+    :rtype: list"""
     async with httpx.AsyncClient() as session: # async client used for async functions
         tasks = [get_xkcd_image(session) for _ in range(number)]
         result = await asyncio.gather(*tasks, return_exceptions=True)
-        """gather used to collect all coroutines""" 
+        """gather used to collect all coroutines"""
     return result
 
 
