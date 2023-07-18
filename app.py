@@ -32,8 +32,8 @@ async def hello():
     for url in urls:
         markup += f'<img src="{url}"></img><br><br>'
 
-    sdgreturn markup
+    return markup
 
 
-if __name__ == '__main__': : :gfsfjh
-    sdwapp.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
