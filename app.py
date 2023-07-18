@@ -9,24 +9,24 @@ from flask import Flask
 app = Flask(__name__)
 
 # function converted to coroutine
-async def get_xkcd_image(session: str) -> dict:
+async def get_xkcd_image(session: str) -> any:
     """function converted to coroutine
     :param session: session to connect server
     :type: str
     :return: json format
-    :rtype: dict"""
+    :rtype: any"""
     random = randint(0, 300)
     result = await session.get(f'http://xkcd.com/{random}/info.0.json')
     """dont wait for the response of API"""
     return result.json()['img']
 
 # function converted to coroutine
-async def get_multiple_images(number: int) -> list:
+async def get_multiple_images(number: int) -> any:
     """function converted to coroutine
     :param number: number
     :type number: int
     :return: list of data
-    :rtype: list"""
+    :rtype: any"""
     async with httpx.AsyncClient() as session:
         # async client used for async functions
         tasks = [get_xkcd_image(session) for _ in range(number)]
