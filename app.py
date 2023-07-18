@@ -9,10 +9,10 @@ from flask import Flask
 app = Flask(__name__)
 
 # function converted to coroutine
-async def get_xkcd_image(session) -> dict:
+async def get_xkcd_image(session: str) -> dict:
     """function converted to coroutine
     :param session: session to connect server
-    :type: obj
+    :type: str
     :return: json format
     :rtype: dict"""
     random = randint(0, 300)
