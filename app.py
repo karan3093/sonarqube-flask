@@ -1,3 +1,4 @@
+"""This program is for achieveing some task"""
 import asyncio
 import time
 from random import randint
