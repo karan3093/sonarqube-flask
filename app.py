@@ -23,7 +23,7 @@ async def get_multiple_images(number):
     """function converted to coroutine"""
     async with httpx.AsyncClient() as session: # async client used for async functions
         tasks = [get_xkcd_image(session) for _ in range(number)]
-        result = await asyncio.gather(*tasks, return_exceptions=True) 
+        result = await asyncio.gather(*tasks, return_exceptions=True)
         """gather used to collect all coroutines""" 
     return result
 
