@@ -143,8 +143,7 @@ def search() -> any:
             'Experience': data[2],
             'Skills': data[3]
         }
-        
-        return render_template('search.html', dic=dic)
+    return render_template('search.html', dic=dic)
 
 if __name__ == '__main__':
     app.run(debug=True)
