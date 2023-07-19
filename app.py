@@ -126,7 +126,10 @@ def update_data(id: str) -> str:
 
 
 @app.route('/search', methods=['POST'])
-def search():
+def search() -> any:
+    """search for user login
+    :return: JSON response with login status
+    :rtype: any"""
     if request.method == "POST":
         group = request.form['search']
         cursor = mysql.connection.cursor()
