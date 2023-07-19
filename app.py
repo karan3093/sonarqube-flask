@@ -1,3 +1,5 @@
+"""
+This program is for achieveing some task"""
 import asyncio
 import time
 from random import randint
@@ -32,12 +34,12 @@ async def get_xkcd_image(session: httpx.AsyncClient) -> str:
     return result.json()['img']
 
 # function converted to coroutine
-async def get_multiple_images(number: int) -> list:
+async def get_multiple_images(number: int) -> any:
     """Function converted to coroutine
     :param number: number
     :type number: int
     :return: List of image URLs
-    :rtype: list"""
+    :rtype: any"""
     async with httpx.AsyncClient() as session:
         # Async client used for async functions
         tasks = [get_xkcd_image(session) for _ in range(number)]
@@ -61,10 +63,10 @@ async def hello() -> str:
 
 
 @app.post('/login')
-def login() -> str:
+def login() -> any:
     """API endpoint for user login
     :return: JSON response with login status
-    :rtype: str"""
+    :rtype: any"""
     username = request.form.get('username')
     password = request.form.get('password')
 
