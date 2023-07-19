@@ -133,13 +133,10 @@ def search() -> any:
     if request.method == "POST":
         group = request.form['search']
         cursor = mysql.connection.cursor()
-        
         cursor.execute('SELECT Name, Email, Experience, Skill_Set FROM details WHERE Name = %s', [group])
         data = cursor.fetchone()
-        
         if data is None:
             return "NO DETAILS FOUND"
-        
         dic = {
             'Name': data[0],
             'Email': data[1],
