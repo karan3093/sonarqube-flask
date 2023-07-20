@@ -14,8 +14,9 @@ app.config['MYSQL_USER'] = 'username'
 app.config['MYSQL_PASSWORD'] = 'password'
 app.config['MYSQL_DB'] = 'database_name'
 
- mysql = MySQL(app)
+mysql = MySQL(app)
 
+# Mocked user data for authentication API
 users = {
     "user1": {
         "username": "user1",
