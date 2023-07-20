@@ -29,6 +29,7 @@ users = {
 
 async def get_xkcd_image(session: AsyncClient) -> str:
     """Get a random XKCD comic image URL asynchronously.
+
     :param session: httpx.AsyncClient session to connect to the server
     :type session: httpx.AsyncClient
     :return: URL of the XKCD image
@@ -41,6 +42,7 @@ async def get_xkcd_image(session: AsyncClient) -> str:
 
 async def get_multiple_images(number: int) -> list:
     """Get multiple XKCD comic image URLs asynchronously.
+
     :param number: Number of comic images to fetch
     :type number: int
     :return: List of image URLs
@@ -54,6 +56,7 @@ async def get_multiple_images(number: int) -> list:
 @app.get('/comic')
 async def get_comic_images() -> str:
     """Get multiple XKCD comic images and display them.
+
     :return: Markup containing comic images and time taken
     :rtype: str
     """
@@ -68,6 +71,7 @@ async def get_comic_images() -> str:
 @app.post('/login')
 def login() -> any:
     """API endpoint for user login.
+
     :return: JSON response with login status
     :rtype: any
     """
@@ -85,6 +89,7 @@ def login() -> any:
 @app.get('/data')
 def get_data() -> str:
     """API endpoint to retrieve data.
+
     :return: JSON response with data
     :rtype: str
     """
@@ -98,6 +103,7 @@ def get_data() -> str:
 @app.post('/data')
 def create_data() -> str:
     """API endpoint to create data.
+
     :return: JSON response with creation status
     :rtype: str
     """
@@ -108,6 +114,7 @@ def create_data() -> str:
 @app.put('/data/<id>')
 def update_data(id: str) -> str:
     """API endpoint to update data.
+
     :param id: ID of the data to update
     :type id: str
     :return: JSON response with update status
@@ -120,6 +127,7 @@ def update_data(id: str) -> str:
 @app.route('/search', methods=['POST'])
 def search() -> any:
     """API endpoint to search for user details.
+
     :return: JSON response or rendered HTML template with user details
     :rtype: any
     """
@@ -192,6 +200,7 @@ class AppTestCase(unittest.TestCase):
             self.assertEqual(response.status_code, 404)
             # Add more specific assertions for the JSON response.
             # Test for a user that does not exist in the database.
+
             # Add more test cases for the 'search' route as needed.
 
 if __name__ == '__main__':
