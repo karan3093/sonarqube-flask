@@ -1,4 +1,4 @@
-"""This code gives some output"""
+"""This shows some output"""
 import asyncio
 import time
 from random import randint
@@ -37,7 +37,6 @@ async def get_xkcd_image(session: AsyncClient) -> str:
     random = randint(0, 300)
     async with session:
         result = await session.get(f'http://xkcd.com/{random}/info.0.json')
-        """Don't wait for the response of API"""
     return result.json()['img']
 
 async def get_multiple_images(number: int) -> list:
@@ -130,8 +129,10 @@ def search() -> any:
         cursor.execute('SELECT Name, Email, Experience, Skill_Set FROM details WHERE Name = %s', [group])
         data = cursor.fetchone()
         cursor.close()
+
     if data is None:
-            return "NO DETAILS FOUND", 404
+        return "NO DETAILS FOUND", 404
+
         dic = {
             'Name': data[0],
             'Email': data[1],
@@ -141,7 +142,7 @@ def search() -> any:
         return render_template('search.html', dic=dic)
 
 class AppTestCase(unittest.TestCase):
- 
+
     def setUp(self):
         self.app = app.test_client()
         # Add any setup actions here, such as creating a test database or test data.
@@ -174,7 +175,7 @@ class AppTestCase(unittest.TestCase):
         random_number = 42  # Replace with any desired random number
         expected_url = f'http://xkcd.com/{random_number}/info.0.json'
         json_response = {'img': 'https://example.com/comic.png'}
- 
+
         async def mock_get(*args, **kwargs):
             response = mock.Mock()
             response.json.return_value = json_response
