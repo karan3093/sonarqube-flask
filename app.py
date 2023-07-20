@@ -1,6 +1,3 @@
-"""
-This program is for achieveing some task
-"""
 import asyncio
 import time
 from random import randint
@@ -9,13 +6,18 @@ from flask import Flask, jsonify, request
 from flask import Flask, request, render_template
 from flask_mysqldb import MySQL
 
+ 
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'username'
 app.config['MYSQL_PASSWORD'] = 'password'
 app.config['MYSQL_DB'] = 'database_name'
 
+ 
+
 mysql = MySQL(app)
+
+ 
 
 # Mocked user data for authentication API
 users = {
@@ -29,6 +31,8 @@ users = {
     }
 }
 
+ 
+
 # function converted to coroutine
 async def get_xkcd_image(session: httpx.AsyncClient) -> str:
     """Function converted to coroutine
@@ -41,6 +45,8 @@ async def get_xkcd_image(session: httpx.AsyncClient) -> str:
         result = await session.get(f'http://xkcd.com/{random}/info.0.json')
     """Don't wait for the response of API"""
     return result.json()['img']
+
+ 
 
 # function converted to coroutine
 async def get_multiple_images(number: int) -> any:
@@ -56,6 +62,9 @@ async def get_multiple_images(number: int) -> any:
         """Gather used to collect all coroutines"""
     return result
 
+ 
+
+ 
 
 @app.get('/comic')
 async def hello() -> str:
@@ -70,6 +79,9 @@ async def hello() -> str:
         markup += f'<img src="{url}"></img><br><br>'
     return markup
 
+ 
+
+ 
 
 @app.post('/login')
 def login() -> any:
@@ -79,6 +91,8 @@ def login() -> any:
     username = request.form.get('username')
     password = request.form.get('password')
 
+ 
+
     if username and password:
         if username in users and users[username]['password'] == password:
             return jsonify({'status': 'success', 'message': 'Login successful'})
@@ -87,6 +101,9 @@ def login() -> any:
     else:
         return jsonify({'status': 'error', 'message': 'Username and password are required'}), 400
 
+ 
+
+ 
 
 @app.get('/data')
 def get_data() -> str:
@@ -100,6 +117,9 @@ def get_data() -> str:
     }
     return jsonify(data)
 
+ 
+
+ 
 
 @app.post('/data')
 def create_data() -> str:
@@ -109,8 +129,13 @@ def create_data() -> str:
     # Process the request and create the data
     # ...
 
+ 
+
     return jsonify({'status': 'success', 'message': 'Data created'})
 
+ 
+
+ 
 
 @app.put('/data/<id>')
 def update_data(id: str) -> str:
@@ -122,8 +147,13 @@ def update_data(id: str) -> str:
     # Process the request and update the data with the given ID
     # ...
 
+ 
+
     return jsonify({'status': 'success', 'message': f'Data with ID {id} updated'})
 
+ 
+
+ 
 
 @app.route('/search', methods=['POST'])
 def search() -> any:
@@ -144,6 +174,8 @@ def search() -> any:
             'Skills': data[3]
         }
     return render_template('search.html', dic=dic)
+
+ 
 
 if __name__ == '__main__':
     app.run(debug=True)
