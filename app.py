@@ -16,7 +16,6 @@ app.config['MYSQL_DB'] = 'database_name'
 
 mysql = MySQL(app)
 
-# Mocked user data for authentication API
 users = {
     "user1": {
         "username": "user1",
@@ -28,7 +27,7 @@ users = {
     }
 }
 
- async def get_xkcd_image(session: AsyncClient) -> str:
+async def get_xkcd_image(session: AsyncClient) -> str:
     """Get a random XKCD comic image URL asynchronously.
     :param session: httpx.AsyncClient session to connect to the server
     :type session: httpx.AsyncClient
@@ -38,6 +37,7 @@ users = {
     random = randint(0, 300)
     async with session:
         result = await session.get(f'http://xkcd.com/{random}/info.0.json')
+        """Don't wait for the response of API"""
     return result.json()['img']
 
 async def get_multiple_images(number: int) -> list:
