@@ -1,4 +1,4 @@
-"""This shows some output"""
+"""This code shows some output"""
 import asyncio
 import time
 from random import randint
@@ -130,8 +130,8 @@ def search() -> any:
         data = cursor.fetchone()
         cursor.close()
 
-    if data is None:
-        return "NO DETAILS FOUND", 404
+        if data is None:
+            return "NO DETAILS FOUND", 404
 
         dic = {
             'Name': data[0],
