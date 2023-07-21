@@ -150,13 +150,13 @@ def search() -> any:
         return render_template('search.html', dic=dic)
 
 class AppTestCase(unittest.TestCase):
-
     def setUp(self):
         self.app = app.test_client()
         # Add any setup actions here, such as creating a test database or test data.
 
     def tearDown(self):
         # Add any cleanup actions here, such as closing the test database connection.
+        pass
 
     def test_comic_route(self):
         """Test the /comic route to get multiple XKCD comic images"""
