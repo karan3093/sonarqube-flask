@@ -157,6 +157,7 @@ class AppTestCase(unittest.TestCase):
 
     def tearDown(self):
         # Add any cleanup actions here, such as closing the test database connection.
+        return True
 
     def test_comic_route(self):
         """Test the /comic route to get multiple XKCD comic images."""
