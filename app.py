@@ -1,3 +1,4 @@
+"""This code gives some output"""
 import asyncio
 import time
 from random import randint
@@ -52,7 +53,7 @@ async def get_multiple_images(number: int) -> list:
         result = await asyncio.gather(*tasks, return_exceptions=True)
     return result
 
-@app.route('/comic')
+@app.get('/comic')
 async def get_comic_images() -> str:
     """Get multiple XKCD comic images and display them.
 
@@ -67,7 +68,7 @@ async def get_comic_images() -> str:
         markup += f'<img src="{url}"></img><br><br>'
     return markup
 
-@app.route('/login', methods=['POST'])
+@app.post('/login')
 def login() -> any:
     """API endpoint for user login.
 
@@ -85,7 +86,7 @@ def login() -> any:
     else:
         return jsonify({'status': 'error', 'message': 'Username and password are required'}), 400
 
-@app.route('/data', methods=['GET'])
+@app.get('/data')
 def get_data() -> str:
     """API endpoint to retrieve data.
 
@@ -99,7 +100,7 @@ def get_data() -> str:
     }
     return jsonify(data)
 
-@app.route('/data', methods=['POST'])
+@app.post('/data')
 def create_data() -> str:
     """API endpoint to create data.
 
@@ -110,7 +111,7 @@ def create_data() -> str:
     # ...
     return jsonify({'status': 'success', 'message': 'Data created'}), 201
 
-@app.route('/data/<id>', methods=['PUT'])
+@app.put('/data/<id>')
 def update_data(id: str) -> str:
     """API endpoint to update data.
 
@@ -156,16 +157,15 @@ class AppTestCase(unittest.TestCase):
 
     def tearDown(self):
         # Add any cleanup actions here, such as closing the test database connection.
-        pass
 
     def test_comic_route(self):
-        """Test the /comic route to get multiple XKCD comic images."""
+        """Test the /comic route to get multiple XKCD comic images"""
         response = self.app.get('/comic')
         self.assertEqual(response.status_code, 200)
         # Add more specific assertions for the content of the response.
 
     def test_login_route(self):
-        """Test the /login route for user login."""
+        """Test the /login route for user login"""
         response = self.app.post('/login', data={'username': 'user1', 'password': 'password1'})
         self.assertEqual(response.status_code, 200)
         # Add more specific assertions for the JSON response.
@@ -180,7 +180,8 @@ class AppTestCase(unittest.TestCase):
 
     def test_get_xkcd_image(self):
         """Test the get_xkcd_image function to retrieve a random XKCD comic image URL."""
-        random_number = 42  # Replace with any desired random number
+        random_number = 42  
+        # Replace with any desired random number
         expected_url = f'http://xkcd.com/{random_number}/info.0.json'
         json_response = {'img': 'https://example.com/comic.png'}
 
@@ -200,7 +201,6 @@ class AppTestCase(unittest.TestCase):
             self.assertEqual(response.status_code, 404)
             # Add more specific assertions for the JSON response.
             # Test for a user that does not exist in the database.
-
             # Add more test cases for the 'search' route as needed.
 
 if __name__ == '__main__':
