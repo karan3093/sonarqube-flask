@@ -27,13 +27,13 @@ users = {
     }
 }
 
-async def get_xkcd_image(session: AsyncClient) -> str:
+async def get_xkcd_image(session: AsyncClient) -> any:
     """Get a random XKCD comic image URL asynchronously.
 
     :param session: httpx.AsyncClient session to connect to the server
     :type session: httpx.AsyncClient
     :return: URL of the XKCD image
-    :rtype: str
+    :rtype: any
     """
     random = randint(0, 300)
     async with session:
@@ -54,11 +54,11 @@ async def get_multiple_images(number: int) -> any:
     return result
 
 @app.get('/comic')
-async def get_comic_images() -> str:
+async def get_comic_images() -> any:
     """Get multiple XKCD comic images and display them.
 
     :return: Markup containing comic images and time taken
-    :rtype: str
+    :rtype: any
     """
     start = time.perf_counter()
     urls = await get_multiple_images(5)
@@ -152,9 +152,13 @@ class AppTestCase(unittest.TestCase):
 
     def setUp(self):
         """Method to setup
+
+        :return: JSON response or rendered HTML template with user details
+        :rtype: any
         """
         self.app = app.test_client()
         # Add any setup actions here, such as creating a test database or test data.
+        return True
 
     def tearDown(self) -> any:
         """Method to teardown
@@ -206,6 +210,7 @@ class AppTestCase(unittest.TestCase):
         json_response = {'img': 'https://example.com/comic.png'}
 
         async def mock_get(*args, **kwargs):
+            """Test the get_xkcd_image function to retrieve a random XKCD comic image URL."""
             response = mock.Mock()
             response.json.return_value = json_response
             return response
