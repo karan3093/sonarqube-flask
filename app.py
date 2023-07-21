@@ -180,7 +180,7 @@ class AppTestCase(unittest.TestCase):
 
     def test_get_xkcd_image(self):
         """Test the get_xkcd_image function to retrieve a random XKCD comic image URL."""
-        random_number = 42  
+        random_number = 42
         # Replace with any desired random number
         expected_url = f'http://xkcd.com/{random_number}/info.0.json'
         json_response = {'img': 'https://example.com/comic.png'}
