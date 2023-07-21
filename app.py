@@ -40,13 +40,13 @@ async def get_xkcd_image(session: AsyncClient) -> str:
         result = await session.get(f'http://xkcd.com/{random}/info.0.json')
     return result.json()['img']
 
-async def get_multiple_images(number: int) -> list:
+async def get_multiple_images(number: int) -> any:
     """Get multiple XKCD comic image URLs asynchronously.
 
     :param number: Number of comic images to fetch
     :type number: int
     :return: List of image URLs
-    :rtype: list
+    :rtype: any
     """
     async with AsyncClient() as session:
         tasks = [get_xkcd_image(session) for _ in range(number)]
@@ -87,11 +87,11 @@ def login() -> any:
         return jsonify({'status': 'error', 'message': 'Username and password are required'}), 400
 
 @app.get('/data')
-def get_data() -> str:
+def get_data() -> any:
     """API endpoint to retrieve data.
 
     :return: JSON response with data
-    :rtype: str
+    :rtype: any
     """
     data = {
         'key1': 'value1',
@@ -101,24 +101,24 @@ def get_data() -> str:
     return jsonify(data)
 
 @app.post('/data')
-def create_data() -> str:
+def create_data() -> any:
     """API endpoint to create data.
 
     :return: JSON response with creation status
-    :rtype: str
+    :rtype: any
     """
     # Process the request and create the data
     # ...
     return jsonify({'status': 'success', 'message': 'Data created'}), 201
 
 @app.put('/data/<id>')
-def update_data(id: str) -> str:
+def update_data(id: str) -> any:
     """API endpoint to update data.
 
     :param id: ID of the data to update
     :type id: str
     :return: JSON response with update status
-    :rtype: str
+    :rtype: any
     """
     # Process the request and update the data with the given ID
     # ...
@@ -137,10 +137,8 @@ def search() -> any:
         cursor.execute('SELECT Name, Email, Experience, Skill_Set FROM details WHERE Name = %s', [group])
         data = cursor.fetchone()
         cursor.close()
-
         if data is None:
             return "NO DETAILS FOUND", 404
-
         dic = {
             'Name': data[0],
             'Email': data[1],
@@ -150,12 +148,10 @@ def search() -> any:
         return render_template('search.html', dic=dic)
 
 class AppTestCase(unittest.TestCase):
+    """Method for APP Test Case"""
 
-    def setUp(self) -> any:
+    def setUp(self):
         """Method to setup
-
-        :return: JSON response or rendered HTML template with user details
-        :rtype: any
         """
         self.app = app.test_client()
         # Add any setup actions here, such as creating a test database or test data.
@@ -178,6 +174,7 @@ class AppTestCase(unittest.TestCase):
         response = self.app.get('/comic')
         self.assertEqual(response.status_code, 200)
         # Add more specific assertions for the content of the response.
+        return response
 
     def test_login_route(self) -> any:
         """Test the /login route for user login.
@@ -203,8 +200,9 @@ class AppTestCase(unittest.TestCase):
         :return: JSON response or rendered HTML template with user details
         :rtype: any
         """
-        random_number = 42  # Replace with any desired random number
-        expected_url = f'http://xkcd.com/{random_number}/info.0.json'
+        random_number = 42
+        # Replace with any desired random number
+        _ = f'http://xkcd.com/{random_number}/info.0.json'
         json_response = {'img': 'https://example.com/comic.png'}
 
         async def mock_get(*args, **kwargs):
@@ -229,6 +227,7 @@ class AppTestCase(unittest.TestCase):
             # Test for a user that does not exist in the database.
 
             # Add more test cases for the 'search' route as needed.
+            return response
 
 if __name__ == '__main__':
     unittest.main()
