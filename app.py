@@ -125,7 +125,7 @@ def update_data(id: str) -> any:
     return jsonify({'status': 'success', 'message': f'Data with ID {id} updated'}), 200
 
 @app.route('/search', methods=['POST'])
-def search() -> any:
+def search():
     """API endpoint to search for user details.
 
     :return: JSON response with update status
@@ -139,13 +139,8 @@ def search() -> any:
         cursor.close()
         if data is None:
             return None
-        dic = {
-            'Name': data[0],
-            'Email': data[1],
-            'Experience': data[2],
-            'Skills': data[3]
-        }
         return True
+    return True
 
 class AppTestCase(unittest.TestCase):
     """Method for APP Test Case"""
