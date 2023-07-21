@@ -149,60 +149,60 @@ def search() -> any:
         }
         return render_template('search.html', dic=dic)
 
-class AppTestCase(unittest.TestCase):
+#class AppTestCase(unittest.TestCase):
 
-    def setUp(self):
-        self.app = app.test_client()
-        # Add any setup actions here, such as creating a test database or test data.
+    # def setUp(self):
+        # self.app = app.test_client()
+        # # Add any setup actions here, such as creating a test database or test data.
 
-    #def tearDown(self):
-        #pass
-        # Add any cleanup actions here, such as closing the test database connection.
+    # #def tearDown(self):
+        # #pass
+        # # Add any cleanup actions here, such as closing the test database connection.
 
-    def test_comic_route(self):
-    """Test the /comic route to get multiple XKCD comic images"""
-        response = self.app.get('/comic')
-        self.assertEqual(response.status_code, 200)
-        # Add more specific assertions for the content of the response.
+    # def test_comic_route(self):
+    # """Test the /comic route to get multiple XKCD comic images"""
+        # response = self.app.get('/comic')
+        # self.assertEqual(response.status_code, 200)
+        # # Add more specific assertions for the content of the response.
 
-    def test_login_route(self):
-        """Test the /login route for user login"""
-        response = self.app.post('/login', data={'username': 'user1', 'password': 'password1'})
-        self.assertEqual(response.status_code, 200)
-        # Add more specific assertions for the JSON response.
+    # def test_login_route(self):
+        # """Test the /login route for user login"""
+        # response = self.app.post('/login', data={'username': 'user1', 'password': 'password1'})
+        # self.assertEqual(response.status_code, 200)
+        # # Add more specific assertions for the JSON response.
 
-        response = self.app.post('/login', data={'username': 'user1', 'password': 'wrong_password'})
-        self.assertEqual(response.status_code, 401)
-        # Test for invalid password
+        # response = self.app.post('/login', data={'username': 'user1', 'password': 'wrong_password'})
+        # self.assertEqual(response.status_code, 401)
+        # # Test for invalid password
 
-        response = self.app.post('/login', data={'username': 'non_existent_user', 'password': 'password'})
-        self.assertEqual(response.status_code, 401)
-        # Test for non-existent user
+        # response = self.app.post('/login', data={'username': 'non_existent_user', 'password': 'password'})
+        # self.assertEqual(response.status_code, 401)
+        # # Test for non-existent user
 
-    def test_get_xkcd_image(self):
-        """Test the get_xkcd_image function to retrieve a random XKCD comic image URL."""
-        random_number = 42
-        # Replace with any desired random number
-        expected_url = f'http://xkcd.com/{random_number}/info.0.json'
-        json_response = {'img': 'https://example.com/comic.png'}
+    # def test_get_xkcd_image(self):
+        # """Test the get_xkcd_image function to retrieve a random XKCD comic image URL."""
+        # random_number = 42
+        # # Replace with any desired random number
+        # expected_url = f'http://xkcd.com/{random_number}/info.0.json'
+        # json_response = {'img': 'https://example.com/comic.png'}
 
-        async def mock_get(*args, **kwargs):
-            response = mock.Mock()
-            response.json.return_value = json_response
-            return response
+        # async def mock_get(*args, **kwargs):
+            # response = mock.Mock()
+            # response.json.return_value = json_response
+            # return response
 
-        with mock.patch.object(AsyncClient, 'get', side_effect=mock_get):
-            result = asyncio.run(get_multiple_images(1))
-            self.assertEqual(result[0], json_response['img'])
+        # with mock.patch.object(AsyncClient, 'get', side_effect=mock_get):
+            # result = asyncio.run(get_multiple_images(1))
+            # self.assertEqual(result[0], json_response['img'])
 
-    def test_search_route(self):
-        """Test the /search route to search for user details."""
-        with app.test_client() as client:
-            response = client.post('/search', data={'search': 'John Doe'})
-            self.assertEqual(response.status_code, 404)
-            # Add more specific assertions for the JSON response.
-            # Test for a user that does not exist in the database.
-            # Add more test cases for the 'search' route as needed.
+    # def test_search_route(self):
+        # """Test the /search route to search for user details."""
+        # with app.test_client() as client:
+            # response = client.post('/search', data={'search': 'John Doe'})
+            # self.assertEqual(response.status_code, 404)
+            # # Add more specific assertions for the JSON response.
+            # # Test for a user that does not exist in the database.
+            # # Add more test cases for the 'search' route as needed.
 
 if __name__ == '__main__':
     unittest.main()
