@@ -156,6 +156,7 @@ class AppTestCase(unittest.TestCase):
         # Add any setup actions here, such as creating a test database or test data.
 
     def tearDown(self):
+        pass
         # Add any cleanup actions here, such as closing the test database connection.
 
     def test_comic_route(self):
