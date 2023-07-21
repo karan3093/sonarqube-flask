@@ -159,7 +159,7 @@ class AppTestCase(unittest.TestCase):
         # Add any cleanup actions here, such as closing the test database connection.
 
     def test_comic_route(self):
-        """Test the /comic route to get multiple XKCD comic images"""
+    """Test the /comic route to get multiple XKCD comic images"""
         response = self.app.get('/comic')
         self.assertEqual(response.status_code, 200)
         # Add more specific assertions for the content of the response.
