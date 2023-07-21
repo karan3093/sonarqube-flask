@@ -125,11 +125,8 @@ def update_data(id: str) -> any:
     return jsonify({'status': 'success', 'message': f'Data with ID {id} updated'}), 200
 
 @app.route('/search', methods=['POST'])
-def search() -> any:
+def search():
     """API endpoint to search for user details.
-
-    :return: JSON response or rendered HTML template with user details
-    :rtype: any
     """
     if request.method == "POST":
         group = request.form['search']
@@ -150,7 +147,7 @@ def search() -> any:
 class AppTestCase(unittest.TestCase):
     """Method for APP Test Case"""
 
-    def setUp(self):
+    def setUp(self) -> any:
         """Method to setup
 
         :return: JSON response or rendered HTML template with user details
@@ -181,12 +178,13 @@ class AppTestCase(unittest.TestCase):
         return response
 
     def test_login_route(self) -> any:
-        """Test the /login route for user login.
+        """Test the login route for user login.
 
         :return: JSON response or rendered HTML template with user details
         :rtype: any
         """
-        response = self.app.post('/login', data={'username': 'user1', 'password': 'password1'})
+        data={'username': 'user1', 'password': 'password1'}
+        response = self.app.post('/login', data)
         self.assertEqual(response.status_code, 200)
         # Add more specific assertions for the JSON response.
 
@@ -209,8 +207,16 @@ class AppTestCase(unittest.TestCase):
         _ = f'http://xkcd.com/{random_number}/info.0.json'
         json_response = {'img': 'https://example.com/comic.png'}
 
-        async def mock_get(*args, **kwargs):
-            """Test the get_xkcd_image function to retrieve a random XKCD comic image URL."""
+        async def mock_get(*args, **kwargs) -> any:
+            """Test the get_xkcd_image function to retrieve a random XKCD comic image URL.
+
+            :param *args: ID of the data to update
+            :type *args: any
+            :param **kwargs: ID of the data to update
+            :type **kwargs: any
+            :return: JSON response with update status
+            :rtype: any
+            """
             response = mock.Mock()
             response.json.return_value = json_response
             return response
