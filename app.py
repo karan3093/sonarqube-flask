@@ -125,7 +125,7 @@ def update_data(id: str) -> any:
     return jsonify({'status': 'success', 'message': f'Data with ID {id} updated'}), 200
 
 @app.route('/search', methods=['POST'])
-def search():
+def search() -> any:
     """API endpoint to search for user details.
 
     :return: JSON response with update status
