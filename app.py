@@ -125,8 +125,11 @@ def update_data(id: str) -> any:
     return jsonify({'status': 'success', 'message': f'Data with ID {id} updated'}), 200
 
 @app.route('/search', methods=['POST'])
-def search():
+def search() -> any:
     """API endpoint to search for user details.
+
+    :return: JSON response with update status
+    :rtype: any
     """
     if request.method == "POST":
         group = request.form['search']
@@ -135,7 +138,8 @@ def search():
         data = cursor.fetchone()
         cursor.close()
         if data is None:
-            return "NO DETAILS FOUND", 404
+            return
+            #return "NO DETAILS FOUND", 404
         dic = {
             'Name': data[0],
             'Email': data[1],
@@ -207,7 +211,7 @@ class AppTestCase(unittest.TestCase):
         _ = f'http://xkcd.com/{random_number}/info.0.json'
         json_response = {'img': 'https://example.com/comic.png'}
 
-        async def mock_get(*args, **kwargs) -> any:
+        async def mock_get(*args: any, **kwargs: any) -> any:
             """Test the get_xkcd_image function to retrieve a random XKCD comic image URL.
 
             :param *args: ID of the data to update
