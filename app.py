@@ -138,15 +138,14 @@ def search() -> any:
         data = cursor.fetchone()
         cursor.close()
         if data is None:
-            return
-            #return "NO DETAILS FOUND", 404
+            return None
         dic = {
             'Name': data[0],
             'Email': data[1],
             'Experience': data[2],
             'Skills': data[3]
         }
-        return render_template('search.html', dic=dic)
+        return True
 
 class AppTestCase(unittest.TestCase):
     """Method for APP Test Case"""
@@ -188,15 +187,16 @@ class AppTestCase(unittest.TestCase):
         :rtype: any
         """
         data={'username': 'user1', 'password': 'password1'}
-        response = self.app.post('/login', data)
+        login_page = '/login'
+        response = self.app.post(login_page, data)
         self.assertEqual(response.status_code, 200)
         # Add more specific assertions for the JSON response.
 
-        response = self.app.post('/login', data={'username': 'user1', 'password': 'wrong_password'})
+        response = self.app.post(login_page, data={'username': 'user1', 'password': 'wrong_password'})
         self.assertEqual(response.status_code, 401)
         # Test for invalid password
 
-        response = self.app.post('/login', data={'username': 'non_existent_user', 'password': 'password'})
+        response = self.app.post(login_page, data={'username': 'non_existent_user', 'password': 'password'})
         self.assertEqual(response.status_code, 401)
         # Test for non-existent user
 
