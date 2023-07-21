@@ -150,13 +150,13 @@ def search() -> any:
         return render_template('search.html', dic=dic)
 
 class AppTestCase(unittest.TestCase):
+
     def setUp(self):
         self.app = app.test_client()
         # Add any setup actions here, such as creating a test database or test data.
 
     def tearDown(self):
         # Add any cleanup actions here, such as closing the test database connection.
-        pass
 
     def test_comic_route(self):
         """Test the /comic route to get multiple XKCD comic images"""
@@ -180,7 +180,7 @@ class AppTestCase(unittest.TestCase):
 
     def test_get_xkcd_image(self):
         """Test the get_xkcd_image function to retrieve a random XKCD comic image URL."""
-        random_number = 42
+        random_number = 42  
         # Replace with any desired random number
         expected_url = f'http://xkcd.com/{random_number}/info.0.json'
         json_response = {'img': 'https://example.com/comic.png'}
