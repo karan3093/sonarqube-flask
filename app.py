@@ -151,22 +151,40 @@ def search() -> any:
 
 class AppTestCase(unittest.TestCase):
 
-    def setUp(self):
+    def setUp(self) -> any:
+        """Method to setup
+
+        :return: JSON response or rendered HTML template with user details
+        :rtype: any
+        """
         self.app = app.test_client()
         # Add any setup actions here, such as creating a test database or test data.
 
-    def tearDown(self):
+    def tearDown(self) -> any:
+        """Method to teardown
+
+        :return: JSON response or rendered HTML template with user details
+        :rtype: any
+        """
         # Add any cleanup actions here, such as closing the test database connection.
         return True
 
-    def test_comic_route(self):
-        """Test the /comic route to get multiple XKCD comic images."""
+    def test_comic_route(self) -> any:
+        """Method to test comic route
+
+        :return: JSON response or rendered HTML template with user details
+        :rtype: any
+        """
         response = self.app.get('/comic')
         self.assertEqual(response.status_code, 200)
         # Add more specific assertions for the content of the response.
 
-    def test_login_route(self):
-        """Test the /login route for user login."""
+    def test_login_route(self) -> any:
+        """Test the /login route for user login.
+
+        :return: JSON response or rendered HTML template with user details
+        :rtype: any
+        """
         response = self.app.post('/login', data={'username': 'user1', 'password': 'password1'})
         self.assertEqual(response.status_code, 200)
         # Add more specific assertions for the JSON response.
@@ -179,8 +197,12 @@ class AppTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 401)
         # Test for non-existent user
 
-    def test_get_xkcd_image(self):
-        """Test the get_xkcd_image function to retrieve a random XKCD comic image URL."""
+    def test_get_xkcd_image(self) -> any:
+        """Test the get_xkcd_image function to retrieve a random XKCD comic image URL.
+
+        :return: JSON response or rendered HTML template with user details
+        :rtype: any
+        """
         random_number = 42  # Replace with any desired random number
         expected_url = f'http://xkcd.com/{random_number}/info.0.json'
         json_response = {'img': 'https://example.com/comic.png'}
@@ -194,8 +216,12 @@ class AppTestCase(unittest.TestCase):
             result = asyncio.run(get_multiple_images(1))
             self.assertEqual(result[0], json_response['img'])
 
-    def test_search_route(self):
-        """Test the /search route to search for user details."""
+    def test_search_route(self) -> any:
+        """Test the /search route to search for user details.
+
+        :return: JSON response or rendered HTML template with user details
+        :rtype: any
+        """
         with app.test_client() as client:
             response = client.post('/search', data={'search': 'John Doe'})
             self.assertEqual(response.status_code, 404)
