@@ -202,10 +202,7 @@ class AppTestCase(unittest.TestCase):
             self.assertEqual(response.status_code, 404)
             # Add more specific assertions for the JSON response.
             # Test for a user that does not exist in the database.
-            # Add more test cases for the 'search' route as needed.    
+            # Add more test cases for the 'search' route as needed.
 
 if __name__ == '__main__':
     unittest.main()
-
-
-
